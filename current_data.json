@@ -1,0 +1,730 @@
+{
+  "config": {
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "periods": [
+      {
+        "id": 1,
+        "label": "Period 1",
+        "time": "09:15 - 10:15",
+        "is_break": false
+      },
+      {
+        "id": 2,
+        "label": "Period 2",
+        "time": "10:15 - 11:15",
+        "is_break": false
+      },
+      {
+        "id": 3,
+        "label": "Period 3",
+        "time": "11:15 - 12:15",
+        "is_break": false
+      },
+      {
+        "id": 4,
+        "label": "Period 4",
+        "time": "12:15 - 01:00",
+        "is_break": false
+      },
+      {
+        "id": 0,
+        "label": "Lunch Break",
+        "time": "01:00 - 01:45",
+        "is_break": true
+      },
+      {
+        "id": 5,
+        "label": "Period 5",
+        "time": "01:45 - 02:45",
+        "is_break": false
+      },
+      {
+        "id": 6,
+        "label": "Period 6",
+        "time": "02:45 - 03:45",
+        "is_break": false
+      },
+      {
+        "id": 7,
+        "label": "Period 7",
+        "time": "03:45 - 04:45",
+        "is_break": false
+      },
+      {
+        "id": 8,
+        "label": "Period 8",
+        "time": "04:45 - 05:45",
+        "is_break": false
+      }
+    ]
+  },
+  "batches": [
+    {
+      "id": "SE",
+      "name": "SE (Second Year CSE)",
+      "sub_batches": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "capacity": 75
+    },
+    {
+      "id": "TE",
+      "name": "TE (Third Year CSE)",
+      "sub_batches": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "capacity": 75
+    },
+    {
+      "id": "BE",
+      "name": "BE (Final Year CSE)",
+      "sub_batches": [
+        "B1",
+        "B2",
+        "B3"
+      ],
+      "capacity": 75
+    }
+  ],
+  "teachers": [
+    {
+      "id": "PSP",
+      "name": "Prof. Pranita Pingale",
+      "short": "PSP",
+      "dept": "CSE"
+    },
+    {
+      "id": "PP",
+      "name": "Prof. Pooja Phad",
+      "short": "PP",
+      "dept": "CSE"
+    },
+    {
+      "id": "SCS",
+      "name": "Prof. Smruthy C.S",
+      "short": "SCS",
+      "dept": "CSE"
+    },
+    {
+      "id": "SW",
+      "name": "Prof. Swapnil Wani",
+      "short": "SW",
+      "dept": "CSE"
+    },
+    {
+      "id": "AK",
+      "name": "Prof. Ashwini Khillari",
+      "short": "AK",
+      "dept": "CSE"
+    },
+    {
+      "id": "MS",
+      "name": "Prof. Manosha S",
+      "short": "MS",
+      "dept": "CSE"
+    },
+    {
+      "id": "DC",
+      "name": "Dr. Divya Chirayil",
+      "short": "DC",
+      "dept": "CSE"
+    },
+    {
+      "id": "PS",
+      "name": "Dr. Pooja Singh",
+      "short": "PS",
+      "dept": "Mathematics"
+    },
+    {
+      "id": "GV",
+      "name": "Mr. Ganesh Venkatasubramanian",
+      "short": "GV",
+      "dept": "Economics"
+    },
+    {
+      "id": "KP",
+      "name": "Prof. Kintu Patel",
+      "short": "KP",
+      "dept": "CSE"
+    },
+    {
+      "id": "VC",
+      "name": "Dr. Vimala Elengo Chettiar",
+      "short": "VC",
+      "dept": "CSE"
+    },
+    {
+      "id": "SD",
+      "name": "Prof. D. Senthilkumar",
+      "short": "SD",
+      "dept": "CSE"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "R1",
+      "name": "Lab308",
+      "type": "Lab",
+      "capacity": 25
+    },
+    {
+      "id": "R2",
+      "name": "Lab6",
+      "type": "Lab",
+      "capacity": 25
+    },
+    {
+      "id": "R3",
+      "name": "Lab307",
+      "type": "Lab",
+      "capacity": 25
+    },
+    {
+      "id": "R4",
+      "name": "Room 201",
+      "type": "Lecture",
+      "capacity": 70
+    },
+    {
+      "id": "R5",
+      "name": "Room302",
+      "type": "Lecture",
+      "capacity": 70
+    },
+    {
+      "id": "R6",
+      "name": "CR3",
+      "type": "Lecture",
+      "capacity": 70
+    }
+  ],
+  "subjects": [
+    {
+      "id": "SE_AM3",
+      "code": "AM-III",
+      "name": "Applied Mathematics III",
+      "teacher_id": "PS",
+      "batch_id": "SE",
+      "sub_batch_id": null,
+      "weekly_hours": 4,
+      "is_lab": false,
+      "color": "#2563eb"
+    },
+    {
+      "id": "SE_DSA",
+      "code": "DSA",
+      "name": "Data Structures & Algorithms",
+      "teacher_id": "PSP",
+      "batch_id": "SE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#7c3aed"
+    },
+    {
+      "id": "SE_DSAT",
+      "code": "DSAT",
+      "name": "Discrete Structure & Automata Theory",
+      "teacher_id": "PP",
+      "batch_id": "SE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#db2777"
+    },
+    {
+      "id": "SE_COA",
+      "code": "COA",
+      "name": "Computer Organization & Architecture",
+      "teacher_id": "MS",
+      "batch_id": "SE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#059669"
+    },
+    {
+      "id": "SE_DBMS",
+      "code": "DBMS",
+      "name": "Database Management System",
+      "teacher_id": "SW",
+      "batch_id": "SE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#d97706"
+    },
+    {
+      "id": "SE_EE",
+      "code": "EE",
+      "name": "Engineering Economics",
+      "teacher_id": "GV",
+      "batch_id": "SE",
+      "sub_batch_id": null,
+      "weekly_hours": 2,
+      "is_lab": false,
+      "color": "#0891b2"
+    },
+    {
+      "id": "SE_L_DSA_H1",
+      "code": "DSA Lab (H1)",
+      "name": "DSA Lab",
+      "teacher_id": "PSP",
+      "batch_id": "SE",
+      "sub_batch_id": "H1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#7c3aed"
+    },
+    {
+      "id": "SE_L_DSA_H2",
+      "code": "DSA Lab (H2)",
+      "name": "DSA Lab",
+      "teacher_id": "PSP",
+      "batch_id": "SE",
+      "sub_batch_id": "H2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#7c3aed"
+    },
+    {
+      "id": "SE_L_DSA_H3",
+      "code": "DSA Lab (H3)",
+      "name": "DSA Lab",
+      "teacher_id": "PSP",
+      "batch_id": "SE",
+      "sub_batch_id": "H3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#7c3aed"
+    },
+    {
+      "id": "SE_L_DBMS_H1",
+      "code": "DBMS Lab (H1)",
+      "name": "DBMS Lab",
+      "teacher_id": "SW",
+      "batch_id": "SE",
+      "sub_batch_id": "H1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#d97706"
+    },
+    {
+      "id": "SE_L_DBMS_H2",
+      "code": "DBMS Lab (H2)",
+      "name": "DBMS Lab",
+      "teacher_id": "SW",
+      "batch_id": "SE",
+      "sub_batch_id": "H2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#d97706"
+    },
+    {
+      "id": "SE_L_DBMS_H3",
+      "code": "DBMS Lab (H3)",
+      "name": "DBMS Lab",
+      "teacher_id": "SW",
+      "batch_id": "SE",
+      "sub_batch_id": "H3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#d97706"
+    },
+    {
+      "id": "SE_L_COA_H1",
+      "code": "COA Lab (H1)",
+      "name": "COA Lab",
+      "teacher_id": "MS",
+      "batch_id": "SE",
+      "sub_batch_id": "H1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#059669"
+    },
+    {
+      "id": "SE_L_COA_H2",
+      "code": "COA Lab (H2)",
+      "name": "COA Lab",
+      "teacher_id": "MS",
+      "batch_id": "SE",
+      "sub_batch_id": "H2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#059669"
+    },
+    {
+      "id": "SE_L_COA_H3",
+      "code": "COA Lab (H3)",
+      "name": "COA Lab",
+      "teacher_id": "MS",
+      "batch_id": "SE",
+      "sub_batch_id": "H3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#059669"
+    },
+    {
+      "id": "SE_L_SKL_H1",
+      "code": "Skill Lab: Py (H1)",
+      "name": "Skill Lab: Python",
+      "teacher_id": "KP",
+      "batch_id": "SE",
+      "sub_batch_id": "H1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#0284c7"
+    },
+    {
+      "id": "SE_L_SKL_H2",
+      "code": "Skill Lab: Py (H2)",
+      "name": "Skill Lab: Python",
+      "teacher_id": "KP",
+      "batch_id": "SE",
+      "sub_batch_id": "H2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#0284c7"
+    },
+    {
+      "id": "SE_L_SKL_H3",
+      "code": "Skill Lab: Py (H3)",
+      "name": "Skill Lab: Python",
+      "teacher_id": "KP",
+      "batch_id": "SE",
+      "sub_batch_id": "H3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#0284c7"
+    },
+    {
+      "id": "TE_SEPM",
+      "code": "SEPM",
+      "name": "Software Eng & Project Mgmt",
+      "teacher_id": "PSP",
+      "batch_id": "TE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#7c3aed"
+    },
+    {
+      "id": "TE_MAL",
+      "code": "PL-Malware",
+      "name": "Program Elective-I (PL-Malware)",
+      "teacher_id": "PP",
+      "batch_id": "TE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#db2777"
+    },
+    {
+      "id": "TE_BT",
+      "code": "BT",
+      "name": "Intro to Blockchain Tech",
+      "teacher_id": "SCS",
+      "batch_id": "TE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#0891b2"
+    },
+    {
+      "id": "TE_CNS",
+      "code": "CNS",
+      "name": "Cryptography & Network Security",
+      "teacher_id": "AK",
+      "batch_id": "TE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#e11d48"
+    },
+    {
+      "id": "TE_L_SEPM_T1",
+      "code": "SEPM Lab (T1)",
+      "name": "SEPM Lab",
+      "teacher_id": "PSP",
+      "batch_id": "TE",
+      "sub_batch_id": "T1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#7c3aed"
+    },
+    {
+      "id": "TE_L_SEPM_T2",
+      "code": "SEPM Lab (T2)",
+      "name": "SEPM Lab",
+      "teacher_id": "PSP",
+      "batch_id": "TE",
+      "sub_batch_id": "T2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#7c3aed"
+    },
+    {
+      "id": "TE_L_SEPM_T3",
+      "code": "SEPM Lab (T3)",
+      "name": "SEPM Lab",
+      "teacher_id": "PSP",
+      "batch_id": "TE",
+      "sub_batch_id": "T3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#7c3aed"
+    },
+    {
+      "id": "TE_L_BT_T1",
+      "code": "BT Lab (T1)",
+      "name": "Blockchain Tech Lab",
+      "teacher_id": "SCS",
+      "batch_id": "TE",
+      "sub_batch_id": "T1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#0891b2"
+    },
+    {
+      "id": "TE_L_BT_T2",
+      "code": "BT Lab (T2)",
+      "name": "Blockchain Tech Lab",
+      "teacher_id": "SCS",
+      "batch_id": "TE",
+      "sub_batch_id": "T2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#0891b2"
+    },
+    {
+      "id": "TE_L_BT_T3",
+      "code": "BT Lab (T3)",
+      "name": "Blockchain Tech Lab",
+      "teacher_id": "SCS",
+      "batch_id": "TE",
+      "sub_batch_id": "T3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#0891b2"
+    },
+    {
+      "id": "TE_L_CNS_T1",
+      "code": "CNS/ICS Lab (T1)",
+      "name": "CNS Lab & ICS Tut",
+      "teacher_id": "VC",
+      "batch_id": "TE",
+      "sub_batch_id": "T1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#4338ca"
+    },
+    {
+      "id": "TE_L_CNS_T2",
+      "code": "CNS/ICS Lab (T2)",
+      "name": "CNS Lab & ICS Tut",
+      "teacher_id": "VC",
+      "batch_id": "TE",
+      "sub_batch_id": "T2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#4338ca"
+    },
+    {
+      "id": "TE_L_CNS_T3",
+      "code": "CNS/ICS Lab (T3)",
+      "name": "CNS Lab & ICS Tut",
+      "teacher_id": "VC",
+      "batch_id": "TE",
+      "sub_batch_id": "T3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#4338ca"
+    },
+    {
+      "id": "BE_MLBC",
+      "code": "ML&BC",
+      "name": "Machine Learning & Blockchain",
+      "teacher_id": "SCS",
+      "batch_id": "BE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#0891b2"
+    },
+    {
+      "id": "BE_EDGE",
+      "code": "Edge/Fog",
+      "name": "Edge/Fog Computing",
+      "teacher_id": "SW",
+      "batch_id": "BE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#d97706"
+    },
+    {
+      "id": "BE_UID",
+      "code": "UID",
+      "name": "DLO4-Usability & Security in UID",
+      "teacher_id": "DC",
+      "batch_id": "BE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#059669"
+    },
+    {
+      "id": "BE_STQA",
+      "code": "DLO3-STQA",
+      "name": "Software Testing & QA / Adv Cloud",
+      "teacher_id": "VC",
+      "batch_id": "BE",
+      "sub_batch_id": null,
+      "weekly_hours": 3,
+      "is_lab": false,
+      "color": "#4338ca"
+    },
+    {
+      "id": "BE_L_ML_B1",
+      "code": "ML&BC Lab (B1)",
+      "name": "ML & Blockchain Lab",
+      "teacher_id": "SCS",
+      "batch_id": "BE",
+      "sub_batch_id": "B1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#0891b2"
+    },
+    {
+      "id": "BE_L_ML_B2",
+      "code": "ML&BC Lab (B2)",
+      "name": "ML & Blockchain Lab",
+      "teacher_id": "SCS",
+      "batch_id": "BE",
+      "sub_batch_id": "B2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#0891b2"
+    },
+    {
+      "id": "BE_L_ML_B3",
+      "code": "ML&BC Lab (B3)",
+      "name": "ML & Blockchain Lab",
+      "teacher_id": "SCS",
+      "batch_id": "BE",
+      "sub_batch_id": "B3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#0891b2"
+    },
+    {
+      "id": "BE_L_EDGE_B1",
+      "code": "Edge/Fog Lab (B1)",
+      "name": "Edge/Fog Computing Lab",
+      "teacher_id": "SW",
+      "batch_id": "BE",
+      "sub_batch_id": "B1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#d97706"
+    },
+    {
+      "id": "BE_L_EDGE_B2",
+      "code": "Edge/Fog Lab (B2)",
+      "name": "Edge/Fog Computing Lab",
+      "teacher_id": "SW",
+      "batch_id": "BE",
+      "sub_batch_id": "B2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#d97706"
+    },
+    {
+      "id": "BE_L_EDGE_B3",
+      "code": "Edge/Fog Lab (B3)",
+      "name": "Edge/Fog Computing Lab",
+      "teacher_id": "SW",
+      "batch_id": "BE",
+      "sub_batch_id": "B3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#d97706"
+    },
+    {
+      "id": "BE_L_DSO_B1",
+      "code": "DevSecOps Lab (B1)",
+      "name": "DevSecOps Lab",
+      "teacher_id": "AK",
+      "batch_id": "BE",
+      "sub_batch_id": "B1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#e11d48"
+    },
+    {
+      "id": "BE_L_DSO_B2",
+      "code": "DevSecOps Lab (B2)",
+      "name": "DevSecOps Lab",
+      "teacher_id": "AK",
+      "batch_id": "BE",
+      "sub_batch_id": "B2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#e11d48"
+    },
+    {
+      "id": "BE_L_DSO_B3",
+      "code": "DevSecOps Lab (B3)",
+      "name": "DevSecOps Lab",
+      "teacher_id": "AK",
+      "batch_id": "BE",
+      "sub_batch_id": "B3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#e11d48"
+    },
+    {
+      "id": "BE_L_OSI_B1",
+      "code": "OSINT Lab (B1)",
+      "name": "Open-Source Intelligence Lab",
+      "teacher_id": "MS",
+      "batch_id": "BE",
+      "sub_batch_id": "B1",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#059669"
+    },
+    {
+      "id": "BE_L_OSI_B2",
+      "code": "OSINT Lab (B2)",
+      "name": "Open-Source Intelligence Lab",
+      "teacher_id": "MS",
+      "batch_id": "BE",
+      "sub_batch_id": "B2",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#059669"
+    },
+    {
+      "id": "BE_L_OSI_B3",
+      "code": "OSINT Lab (B3)",
+      "name": "Open-Source Intelligence Lab",
+      "teacher_id": "MS",
+      "batch_id": "BE",
+      "sub_batch_id": "B3",
+      "weekly_hours": 2,
+      "is_lab": true,
+      "color": "#059669"
+    }
+  ]
+}
