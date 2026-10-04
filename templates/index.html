@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Timetable Generator - Automated College Scheduler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-icon">🗓️</div>
+        <div>
+          <h1 class="brand-title">Smart Timetable Generator</h1>
+          <p class="brand-subtitle">Constraint-Satisfaction Scheduler & Workload Optimizer</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btn-reset" class="btn btn-secondary" title="Reset to default college sample data">
+          <span>🔄</span> Reset Sample Data
+        </button>
+        <button id="btn-export-csv" class="btn btn-secondary" title="Download CSV spreadsheet">
+          <span>📥</span> Export CSV
+        </button>
+        <button id="btn-print" class="btn btn-secondary" title="Print friendly timetable view">
+          <span>🖨️</span> Print / PDF
+        </button>
+        <button id="btn-generate" class="btn btn-primary" title="Run constraint solver">
+          <span>⚡</span> Generate Timetable
+        </button>
+      </div>
+    </header>
+
+    <!-- Stat Metrics Row -->
+    <section class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-icon">👥</div>
+        <div class="metric-info">
+          <span class="metric-label">Batches / Sections</span>
+          <span id="metric-batches" class="metric-value">0</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">📚</div>
+        <div class="metric-info">
+          <span class="metric-label">Total Subjects</span>
+          <span id="metric-subjects" class="metric-value">0</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">👨‍🏫</div>
+        <div class="metric-info">
+          <span class="metric-label">Faculty Members</span>
+          <span id="metric-teachers" class="metric-value">0</span>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">🏛️</div>
+        <div class="metric-info">
+          <span class="metric-label">Rooms & Labs</span>
+          <span id="metric-rooms" class="metric-value">0</span>
+        </div>
+      </div>
+      <div class="metric-card highlight-metric">
+        <div class="metric-icon">🎯</div>
+        <div class="metric-info">
+          <span class="metric-label">Scheduled Status</span>
+          <span id="metric-status" class="metric-value status-badge badge-pending">Not Generated</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="tab-schedule">📅 Timetable Matrix</button>
+      <button class="tab-btn" data-tab="tab-subjects">📚 Subjects & Workload</button>
+      <button class="tab-btn" data-tab="tab-teachers">👨‍🏫 Faculty</button>
+      <button class="tab-btn" data-tab="tab-rooms">🏛️ Rooms & Labs</button>
+      <button class="tab-btn" data-tab="tab-batches">🎓 Batches</button>
+    </nav>
+
+    <!-- TAB 1: SCHEDULE VIEW -->
+    <main id="tab-schedule" class="tab-content active">
+      <div class="view-controls-bar">
+        <div class="view-mode-selector">
+          <span class="control-label">View Mode:</span>
+          <div class="pill-group">
+            <button class="pill-btn active" data-mode="batch">By Batch / Section</button>
+            <button class="pill-btn" data-mode="teacher">By Faculty</button>
+            <button class="pill-btn" data-mode="room">By Room</button>
+          </div>
+        </div>
+
+        <div class="filter-dropdown-container">
+          <label for="filter-select" id="filter-label" class="control-label">Select Batch:</label>
+          <select id="filter-select" class="form-select"></select>
+        </div>
+
+        <div class="schedule-summary-badge" id="schedule-counter-badge">
+          No schedule generated yet. Click "Generate Timetable" to start.
+        </div>
+      </div>
+
+      <!-- Schedule Table Display Area -->
+      <div class="table-container" id="timetable-wrapper">
+        <div class="empty-state" id="empty-schedule-prompt">
+          <div class="empty-icon">📋</div>
+          <h3>No Timetable Generated Yet</h3>
+          <p>Click the <strong>"⚡ Generate Timetable"</strong> button above to run the intelligent constraint solver.</p>
+          <button class="btn btn-primary" onclick="document.getElementById('btn-generate').click()">Generate Now</button>
+        </div>
+        <table class="timetable-grid hidden" id="timetable-table">
+          <thead>
+            <tr id="timetable-header-row">
+              <!-- Dynamically populated -->
+            </tr>
+          </thead>
+          <tbody id="timetable-body">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- TAB 2: SUBJECTS MANAGEMENT -->
+    <section id="tab-subjects" class="tab-content">
+      <div class="section-header">
+        <div>
+          <h2>Subjects & Curriculum</h2>
+          <p>Define courses, weekly lecture hours, teacher assignments, and lab requirements.</p>
+        </div>
+        <button class="btn btn-primary" id="btn-open-add-subject">
+          <span>➕</span> Add Subject
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Subject Name</th>
+              <th>Class</th>
+              <th>Sub-Batch</th>
+              <th>Assigned Faculty</th>
+              <th>Type</th>
+              <th>Hours/Week</th>
+              <th>Color</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="subjects-table-body">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 3: TEACHERS MANAGEMENT -->
+    <section id="tab-teachers" class="tab-content">
+      <div class="section-header">
+        <div>
+          <h2>Faculty Directory</h2>
+          <p>Instructors, departments, and automatically calculated teaching loads.</p>
+        </div>
+        <button class="btn btn-primary" id="btn-open-add-teacher">
+          <span>➕</span> Add Faculty
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Faculty Name</th>
+              <th>Short Tag</th>
+              <th>Department</th>
+              <th>Assigned Hours</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="teachers-table-body">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 4: ROOMS MANAGEMENT -->
+    <section id="tab-rooms" class="tab-content">
+      <div class="section-header">
+        <div>
+          <h2>Rooms & Laboratories</h2>
+          <p>Classrooms and specialized labs for practical sessions.</p>
+        </div>
+        <button class="btn btn-primary" id="btn-open-add-room">
+          <span>➕</span> Add Room / Lab
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Room ID</th>
+              <th>Room Name</th>
+              <th>Facility Type</th>
+              <th>Capacity</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="rooms-table-body">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 5: BATCHES MANAGEMENT -->
+    <section id="tab-batches" class="tab-content">
+      <div class="section-header">
+        <div>
+          <h2>Academic Classes & Lab Sub-Batches</h2>
+          <p>Classes (SE, TE, BE) and their lab subdivisions (e.g. H1, H2, H3 with cap 25).</p>
+        </div>
+        <button class="btn btn-primary" id="btn-open-add-batch">
+          <span>➕</span> Add Class / Batch
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Class ID</th>
+              <th>Class Name</th>
+              <th>Lab Sub-Batches</th>
+              <th>Total Capacity</th>
+              <th>Weekly Hours</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="batches-table-body">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- MODAL: ADD SUBJECT -->
+  <div class="modal-overlay hidden" id="modal-add-subject">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add New Subject</h3>
+        <button class="modal-close" data-close="modal-add-subject">&times;</button>
+      </div>
+      <form id="form-add-subject" class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sub-code">Subject Code *</label>
+            <input type="text" id="sub-code" class="form-input" placeholder="e.g. CS305" required>
+          </div>
+          <div class="form-group">
+            <label for="sub-hours">Weekly Hours *</label>
+            <input type="number" id="sub-hours" class="form-input" min="1" max="10" value="3" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sub-name">Subject Name *</label>
+          <input type="text" id="sub-name" class="form-input" placeholder="e.g. Artificial Intelligence" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sub-batch">Target Class *</label>
+            <select id="sub-batch" class="form-select" required></select>
+          </div>
+          <div class="form-group">
+            <label for="sub-sub-batch">Student Group Scope</label>
+            <select id="sub-sub-batch" class="form-select">
+              <option value="">Whole Class (All Sub-Batches together)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sub-teacher">Assigned Faculty *</label>
+            <select id="sub-teacher" class="form-select" required></select>
+          </div>
+          <div class="form-group">
+            <label for="sub-is-lab">Classroom Requirement</label>
+            <select id="sub-is-lab" class="form-select">
+              <option value="false">Lecture (Theory Classroom)</option>
+              <option value="true">Practical Lab (Requires Lab Room)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sub-color">Theme Color</label>
+          <input type="color" id="sub-color" class="form-input form-color" value="#3b82f6">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="modal-add-subject">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Subject</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD TEACHER -->
+  <div class="modal-overlay hidden" id="modal-add-teacher">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add Faculty Member</h3>
+        <button class="modal-close" data-close="modal-add-teacher">&times;</button>
+      </div>
+      <form id="form-add-teacher" class="modal-body">
+        <div class="form-group">
+          <label for="teacher-name">Full Name *</label>
+          <input type="text" id="teacher-name" class="form-input" placeholder="e.g. Dr. Richard Feynman" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="teacher-short">Short Display Name</label>
+            <input type="text" id="teacher-short" class="form-input" placeholder="e.g. R. Feynman">
+          </div>
+          <div class="form-group">
+            <label for="teacher-dept">Department</label>
+            <input type="text" id="teacher-dept" class="form-input" placeholder="e.g. Physics / CSE" value="CSE">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="modal-add-teacher">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Faculty</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD ROOM -->
+  <div class="modal-overlay hidden" id="modal-add-room">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add Room or Lab</h3>
+        <button class="modal-close" data-close="modal-add-room">&times;</button>
+      </div>
+      <form id="form-add-room" class="modal-body">
+        <div class="form-group">
+          <label for="room-name">Room / Lab Name *</label>
+          <input type="text" id="room-name" class="form-input" placeholder="e.g. Room 204 or Robotics Lab" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="room-type">Room Type *</label>
+            <select id="room-type" class="form-select">
+              <option value="Lecture">Lecture Hall</option>
+              <option value="Lab">Computer / Science Lab</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="room-capacity">Seating Capacity</label>
+            <input type="number" id="room-capacity" class="form-input" value="60" min="10" max="300">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="modal-add-room">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Room</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD BATCH -->
+  <div class="modal-overlay hidden" id="modal-add-batch">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add Student Batch / Section</h3>
+        <button class="modal-close" data-close="modal-add-batch">&times;</button>
+      </div>
+      <form id="form-add-batch" class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="batch-id">Class Code / ID *</label>
+            <input type="text" id="batch-id" class="form-input" placeholder="e.g. SE, TE, BE" required>
+          </div>
+          <div class="form-group">
+            <label for="batch-capacity">Total Capacity</label>
+            <input type="number" id="batch-capacity" class="form-input" value="75" min="10" max="300">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="batch-name">Full Class Name *</label>
+          <input type="text" id="batch-name" class="form-input" placeholder="e.g. SE (Second Year CSE)" required>
+        </div>
+        <div class="form-group">
+          <label for="batch-sub-batches">Lab Sub-Batches (Comma-separated)</label>
+          <input type="text" id="batch-sub-batches" class="form-input" placeholder="e.g. H1, H2, H3 (each cap 25)" value="H1, H2, H3">
+          <small style="color:var(--text-muted);font-size:0.75rem;">Labs will be scheduled for these sub-batches in parallel or rotated sessions.</small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close="modal-add-batch">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Class</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
